@@ -11,22 +11,26 @@ int border;
 int cellw;
 int cellh;
 int speed;
+int count;
+int frame;
 
 void setup() {
-  size(1400, 1000);
+  size(1600, 1200);
   background(255);
-  border = 100;
+  border = 50;
   imgx = border;
   imgy = border;
   imgw = width - 2 * border;
   imgh = height - 2 * border;
-  img = loadImage("img/img001.png");
+  img = loadImage("img/img108.jpg");
   img.resize(imgw, imgh);
   image(img, imgx, imgy);
-  xres = 3;
-  yres = 5;
+  xres = 20;
+  yres = 4;
   cellw = imgw / xres;
   cellh = imgh / yres;
+  count = 0;
+  frame = 0;
 }
 
 int samplex;
@@ -35,6 +39,11 @@ int drawx;
 int drawy;
 
 void draw() {
+  count += 1;
+  if (count >= frame) {
+    saveFrame();
+    frame = count * 2;
+  }
   samplex = (int)random(imgw - cellw);
   sampley = (int)random(imgh - cellh);
   drawx = imgx + (int)random(xres) * cellw;
